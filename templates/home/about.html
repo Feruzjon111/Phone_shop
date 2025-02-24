@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Shop - About</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #4b6cb7, #182848);
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            font-size: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+        }
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+        nav a:hover {
+            color: #ffcc00;
+        }
+        .container {
+            padding: 50px 20px;
+        }
+        .main-text {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .contact-section {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+        }
+        .contact-section h2 {
+            margin-bottom: 15px;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 20px;
+            margin: 15px 0;
+        }
+        .contact-item img {
+            width: 28px;
+            height: 28px;
+        }
+        .contact-item a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .contact-item a:hover {
+            color: #ffffff;
+        }
+        .extra-info {
+            margin-top: 30px;
+            font-size: 18px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Phone Shop</h1>
+        <nav>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'products' %}">Products</a>
+            <a href="{% url 'customer' %}">Customer</a>
+            <a href="{% url 'stores' %}">Stores</a>
+            <a href="{% url 'contact' %}">Contact</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <p class="main-text">Biz bilan bog‘laning</p>
+        <div class="contact-section">
+            <h2>Aloqa ma'lumotlari</h2>
+            <div class="contact-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="User">
+                <span>Feruzjon Muzaffarov</span>
+            </div>
+            <div class="contact-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Phone">
+                <a href="tel:+998956561212">+998 95 656 12 12</a>
+            </div>
+            <div class="contact-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email">
+                <a href="mailto:feruzjon608@gmail.com">feruzjon608@gmail.com</a>
+            </div>
+        </div>
+        <p class="extra-info">Phone Shop - Siz izlagan eng yaxshi telefonlar do'koni! Zamonaviy va ishonchli xizmat.</p>
+    </div>
+</body>
+</html>

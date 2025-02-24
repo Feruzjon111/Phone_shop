@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ phone.brand }} - {{ phone.model }}</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            text-align: center;
+            padding: 40px;
+            margin: 0;
+        }
+        .phone-detail {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            margin: auto;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease-in-out;
+        }
+        .phone-detail:hover {
+            transform: scale(1.02);
+        }
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+        img:hover {
+            transform: scale(1.05);
+        }
+        h1 {
+            font-size: 28px;
+            margin-top: 15px;
+            color: #ffcc00;
+        }
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: #ffcc00;
+            color: #1e3c72;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+        }
+        .back-btn:hover {
+            background: white;
+            color: #1e3c72;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-detail">
+        <img src="{{ phone.image.url }}" alt="{{ phone.brand }} {{ phone.model }}">
+        <h1>{{ phone.brand }} - {{ phone.model }}</h1>
+        <p><strong>Rangi:</strong> {{ phone.color }}</p>
+        <p><strong>Narxi:</strong> ${{ phone.price }}</p>
+        <p><strong>Tavsif:</strong> {{ phone.description }}</p>
+        <a href="{% url 'products' %}" class="back-btn">⬅️ Ortga qaytish</a>
+    </div>
+</body>
+</html>

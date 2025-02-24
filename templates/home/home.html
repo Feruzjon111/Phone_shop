@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Phone Shop</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff9966, #ff5e62, #4facfe, #00f2fe);
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            animation: gradientBG 3s ease infinite alternate;
+        }
+        @keyframes gradientBG {
+            0% { background: linear-gradient(135deg, #ff9966, #ff5e62); }
+            100% { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        }
+        header {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            font-size: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+        }
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+        nav a:hover {
+            color: #ff9966;
+        }
+        .container {
+            padding: 50px 20px;
+        }
+        .btn {
+            background: white;
+            color: #ff5e62;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+        .btn:hover {
+            background: #ff5e62;
+            color: white;
+        }
+        .phones {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 40px;
+        }
+        .phone-card {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+        }
+        .phone-card:hover {
+            transform: scale(1.05);
+        }
+        .phone-card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .phone-card h3 {
+            color: #ff5e62;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Phone Shop</h1>
+        <nav>
+            <a href="{% url 'products' %}">Products</a>
+            <a href="{% url 'customer' %}">Customer</a>
+            <a href="{% url 'stores' %}">Stores</a>
+            <a href="{% url 'about' %}">About</a>
+            <a href="{% url 'contact' %}">Contact</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Sizga eng yaxshi telefonlar va xizmatlar!</h2>
+        <button class="btn" onclick="window.location.href='{% url 'products' %}'">Mahsulotlarni ko‘rish</button>
+    </div>
+
+    <section class="phones">
+        {% for phone in phones %}
+            <div class="phone-card">
+                <img src="{{ phone.image.url }}" alt="{{ phone.brand }} {{ phone.model }}">
+                <h3>{{ phone.brand }} - {{ phone.model }}</h3>
+                <p>Rangi: {{ phone.color }}</p>
+                <p>Narxi: ${{ phone.price }}</p>
+            </div>
+        {% endfor %}
+    </section>
+</body>
+</html>

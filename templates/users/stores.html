@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do'konlar</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+        .container {
+            padding: 50px 20px;
+        }
+        .stores {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .store-card {
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+        .store-card:hover {
+            transform: scale(1.05);
+        }
+        .store-card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .btn {
+            display: block;
+            margin-top: 10px;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'products' %}">Products</a>
+            <a href="{% url 'customer' %}">Customers</a>
+            <a href="{% url 'about' %}">About</a>
+            <a href="{% url 'contact' %}">Contact</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <section class="stores">
+            {% for store in stores %}
+            <div class="store-card">
+                {% if store.image %}
+                    <img src="{{ store.image.url }}" alt="{{ store.name }}">
+                {% else %}
+                    <img src="/static/images/default-store.jpg" alt="Default Image">
+            {% endif %}
+                <h3>{{ store.name }}</h3>
+            <p><strong>Manzil:</strong> {{ store.location }}</p>
+            <p><strong>Telefon:</strong> {{ store.phone }}</p>
+            <a href="{% url 'store_detail' store.id %}" class="btn">Batafsil</a>
+    </div>
+{% endfor %}
+
+        </section>
+    </div>
+</body>
+</html>
