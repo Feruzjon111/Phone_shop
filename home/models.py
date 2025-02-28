@@ -9,7 +9,7 @@ class Phone(models.Model):
     description = models.TextField(blank=True, null=True)
     is_sold = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    image = models.ImageField(upload_to='images/')
+    image = models.ImageField(upload_to='images/', blank=True, null=True)
     is_existence = models.BooleanField(default=True)
     created_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
@@ -22,39 +22,20 @@ class Phone(models.Model):
         return self.brand
 
 
-# class Comment(models.Model):
-#     phone = models.ForeignKey(Phone, on_delete=models.CASCADE)
-#     name = models.CharField(max_length=70)
-#     email = models.EmailField()
-#     text = models.TextField()
-#     created_date = models.DateTimeField(auto_now_add=True)
-#     update_date = models.DateTimeField(auto_now=True)
-#
-#
-#     class Meta:
-#         ordering = ['-created_date']
-#         verbose_name = 'Comment'
-#
-#     def __str__(self):
-#         return self.name
-
-
-class Product(models.Model):
-    brand = models.CharField(max_length=70)
-    model = models.CharField(max_length=70)
-    color = models.CharField(max_length=70)
-    price = models.PositiveIntegerField()
-    image = models.ImageField(upload_to='images/')
-    description = models.TextField(blank=True, null=True)
-    is_sold = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
-    is_existence = models.BooleanField(default=True)
+class Comment(models.Model):
+    phone = models.ForeignKey(Phone, on_delete=models.CASCADE, related_name='comments')
+    name = models.CharField(max_length=70)
+    email = models.EmailField()
+    text = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
 
+
     class Meta:
         ordering = ['-created_date']
-        verbose_name = 'Product'
+        verbose_name = 'Comment'
 
     def __str__(self):
-        return self.brand
+        return f"{self.name} - {self.text[:20]}"
+
+

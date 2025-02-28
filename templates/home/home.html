@@ -105,7 +105,12 @@
     <section class="phones">
         {% for phone in phones %}
             <div class="phone-card">
-                <img src="{{ phone.image.url }}" alt="{{ phone.brand }} {{ phone.model }}">
+                    {% if phone.image %}
+                        <img src="{{ phone.image.url }}" alt="{{ phone.brand }} {{ phone.model }}">
+                    {% else %}
+                        {% load static %}
+                        <img src="{% static 'defaults/default_phone.jpeg' %}" alt="No Image Available">
+                    {% endif %}
                 <h3>{{ phone.brand }} - {{ phone.model }}</h3>
                 <p>Rangi: {{ phone.color }}</p>
                 <p>Narxi: ${{ phone.price }}</p>
