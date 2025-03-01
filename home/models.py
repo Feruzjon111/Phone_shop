@@ -23,7 +23,7 @@ class Phone(models.Model):
 
 
 class Comment(models.Model):
-    phone = models.ForeignKey(Phone, on_delete=models.CASCADE, related_name='comments')
+    phone = models.CharField(max_length=9)
     name = models.CharField(max_length=70)
     email = models.EmailField()
     text = models.TextField()

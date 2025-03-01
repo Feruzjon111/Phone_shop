@@ -8,78 +8,69 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #121212, #1e1e1e);
+            background: linear-gradient(135deg, #1b1b3a, #009ffd);
             color: #ffffff;
             text-align: center;
-            padding: 40px;
+            padding: 10px;
             margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
         .comment-form {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
             border-radius: 15px;
-            max-width: 500px;
-            margin: auto;
-            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(15px);
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .comment-form:hover {
-            transform: scale(1.02);
+            max-width: 350px;
+            width: 100%;
+            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
         }
 
         h1 {
-            font-size: 26px;
-            margin-bottom: 15px;
+            font-size: 20px;
+            margin-bottom: 12px;
             color: #ffcc00;
         }
 
         label {
-            font-size: 18px;
+            font-size: 14px;
             display: block;
             text-align: left;
-            margin-bottom: 5px;
-            color: #dcdcdc;
+            margin-bottom: 6px;
         }
 
         input, textarea {
             width: 100%;
-            padding: 12px;
+            padding: 8px;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            margin-bottom: 15px;
+            border-radius: 6px;
+            font-size: 12px;
+            margin-bottom: 8px;
             background: rgba(255, 255, 255, 0.2);
             color: #ffffff;
             outline: none;
-            transition: all 0.3s ease-in-out;
-        }
-
-        input:focus, textarea:focus {
-            background: rgba(255, 255, 255, 0.3);
         }
 
         textarea {
-            height: 120px;
+            height: 80px;
             resize: none;
         }
 
         .btn-container {
-            margin-top: 10px;
+            margin-top: 8px;
+            text-align: center;
         }
 
         .btn {
-            display: inline-block;
-            padding: 12px 20px;
-            border-radius: 25px;
-            font-size: 18px;
+            padding: 8px 14px;
+            border-radius: 18px;
+            font-size: 12px;
             font-weight: bold;
-            transition: all 0.3s ease-in-out;
             text-decoration: none;
             cursor: pointer;
-            margin: 5px;
             border: none;
         }
 
@@ -88,31 +79,32 @@
             color: #1e1e1e;
         }
 
-        .submit-btn:hover {
-            background: #e6b800;
-        }
-
         .back-btn {
             background: #17a2b8;
             color: white;
         }
 
-        .back-btn:hover {
-            background: #117a8b;
+        .phone-input {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            padding: 5px;
+        }
+
+        .phone-prefix {
+            color: #fff;
+            font-size: 12px;
+            margin-right: 4px;
         }
     </style>
 </head>
 <body>
     <div class="comment-form">
         <h1>💬 Izoh qo‘shish</h1>
-        <form action="{% url 'add_comment' phone.pk %}" method="post">
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <label for="name">Ismingiz:</label>
-            <input type="text" id="name" name="name" placeholder="Ismingizni kiriting..." required>
-
-            <label for="text">Izoh:</label>
-            <textarea id="text" name="text" placeholder="Izohingizni shu yerga yozing..." required></textarea>
-
+            {{ form.as_p }}
             <div class="btn-container">
                 <button type="submit" class="btn submit-btn">📩 Yuborish</button>
                 <a href="{% url 'phone_detail' phone.pk %}" class="btn back-btn">⬅️ Ortga qaytish</a>

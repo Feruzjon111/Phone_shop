@@ -25,11 +25,11 @@
 
         .container {
             background: white;
-            padding: 30px;
+            padding: 25px;
             border-radius: 15px;
             box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
-            max-width: 400px;
             width: 100%;
+            max-width: 320px;
             text-align: center;
             animation: fadeIn 1s ease-in-out;
         }
@@ -47,23 +47,47 @@
 
         h2 {
             color: #333;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
             font-weight: 600;
+            font-size: 18px;
         }
 
-        input {
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            outline: none;
+        }
+
+        form p {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 6px;
+        }
+
+        input, button, .file-input, textarea {
+            width: 100%;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 14px;
             transition: 0.3s;
         }
 
-        input:focus {
+        input, textarea {
+            border: 2px solid #ddd;
+            outline: none;
+        }
+
+        input:focus, textarea:focus {
             border-color: #0072ff;
-            box-shadow: 0px 0px 10px rgba(0, 114, 255, 0.3);
+            box-shadow: 0px 0px 6px rgba(0, 114, 255, 0.3);
+        }
+
+        textarea {
+            height: 50px;
+            resize: none;
         }
 
         .file-input {
@@ -72,13 +96,11 @@
             justify-content: center;
             align-items: center;
             border: 2px dashed #0072ff;
-            padding: 10px;
-            border-radius: 8px;
             cursor: pointer;
-            margin: 10px 0;
             color: #0072ff;
             font-weight: bold;
-            transition: 0.3s;
+            background: rgba(0, 114, 255, 0.1);
+            text-align: center;
         }
 
         .file-input:hover {
@@ -95,16 +117,11 @@
         }
 
         button {
-            width: 100%;
-            padding: 12px;
             background: #0072ff;
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
             cursor: pointer;
-            margin-top: 10px;
-            transition: 0.3s;
+            margin-top: 6px;
         }
 
         button:hover {
@@ -114,18 +131,14 @@
 
         .back-btn {
             display: block;
-            width: 100%;
-            padding: 12px;
             background: #ddd;
             color: #333;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 10px;
             text-decoration: none;
             text-align: center;
-            transition: 0.3s;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-top: 6px;
         }
 
         .back-btn:hover {
@@ -138,17 +151,7 @@
         <h2>Create a New Phone</h2>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <input type="text" name="brand" placeholder="Brand" required>
-            <input type="text" name="model" placeholder="Model" required>
-            <input type="text" name="color" placeholder="Color" required>
-            <input type="number" name="price" placeholder="Price" required>
-            <input type="text" name="description" placeholder="Description" required>
-
-            <label class="file-input">
-                Upload Image
-                <input type="file" name="image" required>
-            </label>
-
+            {{ form.as_p }}
             <button type="submit">Create Phone</button>
         </form>
         <a href="{% url 'products' %}" class="back-btn">Back to Home</a>

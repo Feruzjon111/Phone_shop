@@ -15,7 +15,7 @@
         }
 
         body {
-            background: radial-gradient(circle at top left, #1a1a2e, #16213e, #0f3460);
+            background: linear-gradient(135deg, #1e1e2f, #2a3b5c);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -24,21 +24,21 @@
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.15);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
             width: 100%;
             max-width: 400px;
             text-align: center;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            animation: fadeIn 0.8s ease-in-out;
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeIn 0.7s ease-in-out;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h2 {
@@ -54,46 +54,46 @@
         }
 
         .input-group label {
-            font-size: 14px;
+            font-size: 13px;
             color: #ffcc00;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             font-weight: bold;
         }
 
         .input-group input {
             width: 100%;
-            padding: 12px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.15);
             color: white;
-            font-size: 16px;
+            font-size: 14px;
             outline: none;
             transition: 0.3s;
         }
 
         .input-group input:focus {
             border-color: #ffcc00;
-            box-shadow: 0px 0px 10px rgba(255, 204, 0, 0.6);
+            box-shadow: 0px 0px 6px rgba(255, 204, 0, 0.6);
         }
 
         .file-input {
             display: block;
-            padding: 12px;
-            border: 2px dashed #ffcc00;
-            border-radius: 8px;
+            padding: 10px;
+            border: 1px dashed #ffcc00;
+            border-radius: 6px;
             cursor: pointer;
             text-align: center;
             color: #ffcc00;
             font-weight: bold;
             transition: 0.3s;
-            margin-top: 10px;
+            margin-top: 12px;
         }
 
         .file-input:hover {
             background: #ffcc00;
-            color: #1a1a2e;
+            color: #1e1e2f;
         }
 
         button {
@@ -102,31 +102,31 @@
             background: linear-gradient(45deg, #ffcc00, #ff9900);
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
+            border-radius: 6px;
+            font-size: 15px;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 12px;
             transition: 0.3s;
-            box-shadow: 0px 4px 10px rgba(255, 204, 0, 0.5);
+            box-shadow: 0px 3px 8px rgba(255, 204, 0, 0.5);
         }
 
         button:hover {
             background: linear-gradient(45deg, #ff9900, #ffcc00);
             transform: scale(1.05);
-            box-shadow: 0px 6px 15px rgba(255, 153, 0, 0.7);
+            box-shadow: 0px 5px 12px rgba(255, 153, 0, 0.7);
         }
 
         .back-btn {
             display: block;
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             background: rgba(255, 255, 255, 0.2);
             color: white;
-            border-radius: 8px;
-            font-size: 16px;
+            border-radius: 6px;
+            font-size: 14px;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 12px;
             text-align: center;
             text-decoration: none;
             transition: 0.3s;
@@ -143,36 +143,7 @@
         <h2>Update Phone</h2>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-
-            <div class="input-group">
-                <label>Brand</label>
-                <input type="text" name="brand" value="{{ phone.brand }}" required>
-            </div>
-
-            <div class="input-group">
-                <label>Model</label>
-                <input type="text" name="model" value="{{ phone.model }}" required>
-            </div>
-
-            <div class="input-group">
-                <label>Color</label>
-                <input type="text" name="color" value="{{ phone.color }}" required>
-            </div>
-
-            <div class="input-group">
-                <label>Price ($)</label>
-                <input type="number" name="price" value="{{ phone.price }}" required>
-            </div>
-
-            <div class="input-group">
-                <label>Description</label>
-                <input type="text" name="description" value="{{ phone.description }}" required>
-            </div>
-
-            <label class="file-input">
-                Upload New Image
-                <input type="file" name="image">
-            </label>
+            {{ form.as_p }}
 
             <button type="submit">Update Phone</button>
         </form>

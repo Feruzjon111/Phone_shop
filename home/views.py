@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from .forms import PhoneForm, CommentForm
 from .models import Phone, Comment
 
 def home(request):
@@ -24,31 +25,23 @@ def phone_detail(request, pk):
     return render(request, 'home/phone_detail.html', context)
 
 def phone_create(request):
-    phone = Phone()
-    if request.method == 'POST':
-        phone.brand = request.POST.get('brand', '')
-        phone.model = request.POST.get('model', '')
-        phone.color = request.POST.get('color', '')
-        phone.price = request.POST.get('price', 0)
-        phone.description = request.POST.get('description', '')
-        phone.image = request.FILES.get('image')
-        phone.save()
+    form = PhoneForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        form.save()
         return redirect('products')
-    return render(request, 'home/phone_create.html', {'phone': phone})
+    return render(request, 'home/phone_create.html', {'form': form})
 
 
 def phone_update(request, pk):
     phone = get_object_or_404(Phone, id=pk)
     if request.method == 'POST':
-        phone.brand = request.POST.get('brand', phone.brand)
-        phone.model = request.POST.get('model', phone.model)
-        phone.color = request.POST.get('color', phone.color)
-        phone.price = request.POST.get('price', phone.price)
-        phone.description = request.POST.get('description', phone.description)
-        phone.image = request.FILES.get('image', phone.image)
-        phone.save()
-        return redirect('phone_detail', pk=phone.pk)
-    return render(request, 'home/phone_update.html', {'phone': phone})
+        form = PhoneForm(request.POST, request.FILES, instance=phone)
+        if form.is_valid():
+            form.save()
+            return redirect('phone_detail', pk=phone.pk)
+    else:
+        form = PhoneForm(instance=phone)
+    return render(request, 'home/phone_update.html', {'form': form, 'phone': phone})
 
 
 def phone_delete(request, pk):
@@ -60,13 +53,15 @@ def phone_delete(request, pk):
 
 def add_comment(request, pk):
     phone = get_object_or_404(Phone, id=pk)
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        text = request.POST.get('text')
-        if name and text:
-            Comment.objects.create(phone=phone, name=name, text=text)
-            return redirect('phone_detail', pk=phone.pk)
-    return render(request, 'home/add_comment.html', {'phone': phone})
+    form = CommentForm(request.POST or None)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.phone = phone
+        comment.save()
+        return redirect('phone_detail', pk=pk)
+    return render(request, 'home/add_comment.html', {'form': form, 'phone': phone})
+
+
 
 
 
