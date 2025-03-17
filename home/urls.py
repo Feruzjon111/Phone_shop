@@ -7,12 +7,12 @@ urlpatterns = [
     path("", home, name="home"),
     path("about/", about, name="about"),
     path("contact/", contact, name="contact"),
-    path("products/", products, name="products"),
-    path("phone/<int:pk>/", phone_detail, name="phone_detail"),
-    path("phone_create/", phone_create, name="phone_create"),
-    path("phone/phone_update/<int:pk>/", phone_update, name="phone_update"),
-    path("phone_delete/<int:pk>/", phone_delete, name="phone_delete"),
-    path('phone/<int:pk>/comment/', add_comment, name='add_comment'),
+    path("products/", PhoneListView.as_view() , name="products"),
+    path("phone/<int:pk>/", PhoneDetailView.as_view() , name="phone_detail"),
+    path("phone_create/", PhoneCreateView.as_view() , name="phone_create"),
+    path("phone/phone_update/<int:pk>/", PhoneUpdateView.as_view() , name="phone_update"),
+    path("phone_delete/<int:pk>/", PhoneDeleteView.as_view() , name="phone_delete"),
+    path('phone/<int:pk>/comment/', AddCommentView.as_view(), name='add_comment'),
 ]
 
 if settings.DEBUG:
